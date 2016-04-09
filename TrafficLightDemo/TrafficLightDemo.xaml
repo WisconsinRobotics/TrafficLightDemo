@@ -1,0 +1,119 @@
+﻿<Window x:Class="TrafficLightDemo.TrafficLightDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wisconsin Robotics Traffic Light Demonstration" Icon="icon.ico"
+        Height="500" Width="750">
+
+    <!-- 
+        REMARKS
+        Border tags are used for margins and padding. I don't know if it's the "correct" way to do it,
+        but it certainly works very well.
+     -->
+    <Border BorderBrush="LightGray" BorderThickness="0 1 0 0">
+        <Grid>
+            <!-- Column defintions-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Define left column to hold WR logo & Information-->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="White" BorderThickness="5">
+                    <Image Source="logo.png" />
+                </Border>
+                <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="0 1 0 1">
+                    <Viewbox>
+                        <Label TextElement.FontWeight="Bold" HorizontalAlignment="Center">About Us</Label>
+                    </Viewbox>
+                </Border>
+                <StackPanel Grid.Row="2">
+                    <Viewbox>
+                        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap">
+                        Founded in 2002, Wisconsin Robotics proudly represents<LineBreak/>
+                        the students of the University of Wisconsin-Madison.<LineBreak/>
+                        <LineBreak/>
+                        Team members design, test, and implement autonomous<LineBreak/>
+                        and teleoperated robots for national competitions and <LineBreak/>
+                        practical applications with the goal of furthering the field<LineBreak/>
+                        of robotics, educating the public, and developing skills <LineBreak/>
+                        in design and project management to be carried<LineBreak/>
+                        forward into student’s professional careers.<LineBreak/>
+
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        To learn more, visit us at: <LineBreak/>
+                        </TextBlock>
+                    </Viewbox>
+                    <Border BorderBrush="LightGray" BorderThickness="0 0 0 1"/>
+                    <Image Source="wr_site_qr.png"/>
+                </StackPanel>
+            </Grid>
+
+            <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"/>
+
+            <!-- Traffic Light Counter + Image -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="{Binding ImageSource}" Stretch="Fill" />
+                </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <Label x:Name="PeopleTrackedLabel" VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
+                </Viewbox>
+                <Viewbox Grid.Row="2">
+                    <Label VerticalAlignment="Center" HorizontalContentAlignment="Center">
+                        <Bold>
+                            <Italic>Please do NOT touch the traffic light!</Italic>
+                        </Bold>
+                    </Label>
+                </Viewbox>
+            </Grid>
+
+            <Border Grid.Column="3" BorderBrush="LightGray" BorderThickness="1"/>
+
+            <!-- The "How it works" text -->
+            <StackPanel Grid.Column="4">
+                <Border BorderBrush="LightGray" BorderThickness="0 0 0 1">
+                    <Viewbox>
+                        <Label TextElement.FontWeight="Bold" HorizontalAlignment="Center">How it works</Label>
+                    </Viewbox>
+                </Border>
+                <Viewbox>
+                    <TextBlock VerticalAlignment="Top" TextWrapping="Wrap">
+                        The Kinect acts like a robotic eye - <LineBreak/>
+                        It can see how many people in front of it! <LineBreak/>
+                        <LineBreak/>
+                        In fact, it reacts by flashing lights on the <LineBreak/>
+                        traffic light! With a couple others, try it! <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Bold>Behavior:</Bold><LineBreak/>
+                        •    <Bold>0 people tracked</Bold> - flash red, slowly <LineBreak/>
+                        •    <Bold>1 people tracked</Bold> - flash red, quickly <LineBreak/>
+                        •    <Bold>2 people tracked</Bold> - flash yellow, slowly <LineBreak/>
+                        •    <Bold>3 people tracked</Bold> - flash yellow, quickly <LineBreak/>
+                        •    <Bold>4 people tracked</Bold> - flash green, slowly <LineBreak/>
+                        •    <Bold>5 people tracked</Bold> - flash green, quickly <LineBreak/>
+                        •    <Bold>6 people tracked</Bold> - ??? - find out! <LineBreak/>
+                    </TextBlock>
+                </Viewbox>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
