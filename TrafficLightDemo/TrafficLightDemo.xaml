@@ -65,17 +65,35 @@
             <!-- Traffic Light Counter + Image -->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Viewbox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="{Binding ImageSource}" Stretch="Fill" />
-                </Viewbox>
-                <Viewbox Grid.Row="1">
-                    <Label x:Name="PeopleTrackedLabel" VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
-                </Viewbox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Border BorderBrush="Black" BorderThickness="1 1 0 1">
+                        <Label>Traffic Light Port</Label>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0 1 0 1">
+                        <TextBox x:Name="TrafficLightPortTextBox" MaxLength="4" VerticalAlignment="Center">COMX</TextBox>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="0 1 1 1">
+                        <Button x:Name="TrafficLightSetPortButton" VerticalAlignment="Center" Click="TrafficLightSetPortButton_Click">
+                            Enable
+                        </Button>
+                    </Border>
+                </StackPanel>
+                <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="0 1 0 1">
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="{Binding ImageSource}" Stretch="Fill" />
+                    </Viewbox>
+                </Border>
                 <Viewbox Grid.Row="2">
+                    <Label x:Name="PeopleTrackedLabel" VerticalAlignment="Center" HorizontalContentAlignment="Center">
+                        # of people tracked: 0
+                    </Label>
+                </Viewbox>
+                <Viewbox Grid.Row="3">
                     <Label VerticalAlignment="Center" HorizontalContentAlignment="Center">
                         <Bold>
                             <Italic>Please do NOT touch the traffic light!</Italic>

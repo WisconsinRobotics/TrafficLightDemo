@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
@@ -103,15 +104,17 @@ namespace TrafficLightDemo
         private List<Pen> bodyColors;
         #endregion
 
-        const string SERIAL_PORT = "COM4";
+        const string HELP_TEXT = @"";
         const int BAUD_RATE = 9600;
 
         BodyFrameReader bodyFrameReader;
         KinectSensor sensor;
-        SerialPort trafficLightPort;
+        SerialPort trafficLightSerialPort;
+        bool trafficLightEn;
 
         public TrafficLightDemo()
         {
+            trafficLightEn = false;
             sensor = KinectSensor.GetDefault();
             bodyFrameReader = sensor.BodyFrameSource.OpenReader();
 
@@ -122,15 +125,41 @@ namespace TrafficLightDemo
             sensor.Open();
 
             InitializeComponent();
-
-            // initialize the serial port for the traffic light
-            trafficLightPort = new SerialPort(SERIAL_PORT, BAUD_RATE);
-            trafficLightPort.Open();
         }
 
         public ImageSource ImageSource
         {
             get { return imageSource; }
+        }
+
+        private void TrafficLightSetPortButton_Click(object sender, RoutedEventArgs eventArgs)
+        {
+            string port = TrafficLightPortTextBox.Text;
+
+            if (!Regex.Match(port, @"(?i)COM\d").Success)
+            {
+                MessageBox.Show("Invalid serial port - should be in the form COM#!", "Error");
+                return;
+            }
+
+            trafficLightSerialPort = new SerialPort(port, BAUD_RATE);
+            try 
+            {
+                trafficLightSerialPort.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(
+                    string.Format(@"Failed to open {0}, please check that the traffic light is connected to that port. 
+                                    Exception: {1}", port, e.GetType().Name),
+                    "Error");
+                return;
+            }
+
+            // successful opening - disable button & textbox
+            TrafficLightPortTextBox.IsEnabled = false;
+            TrafficLightSetPortButton.IsEnabled = false;
+            trafficLightEn = true;
         }
 
         private void InitializeBodyFrameDisplayVariables()
@@ -219,7 +248,7 @@ namespace TrafficLightDemo
         private void UpdateTrafficLight(int peopleTracked)
         {
             char c = (char)(peopleTracked + 'a');
-            trafficLightPort.Write(char.ToString(c));
+            trafficLightSerialPort.Write(char.ToString(c));
         }
 
         private void BodyFrameArrived(object sender, BodyFrameArrivedEventArgs e)
@@ -239,7 +268,8 @@ namespace TrafficLightDemo
 
                 // update the traffic light & GUI text
                 int peopleTracked = bodies.Where(body => body.IsTracked || body.IsRestricted).Count();
-                UpdateTrafficLight(peopleTracked);
+                if (trafficLightEn)
+                    UpdateTrafficLight(peopleTracked);
                 PeopleTrackedLabel.Content = string.Format("# of people tracked: {0}", peopleTracked);
             }
 
