@@ -1,8 +1,8 @@
-﻿<Window x:Class="TrafficLightDemo.TrafficLightDemo"
+﻿<Window x:Class="WisconsinRobotics.TrafficLightDemo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Wisconsin Robotics Traffic Light Demonstration" Icon="icon.ico"
-        Height="500" Width="750">
+        Height="500" Width="750" Closing="OnWindowClosing">
 
     <!-- 
         REMARKS

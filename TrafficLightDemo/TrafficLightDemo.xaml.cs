@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 using Microsoft.Kinect;
 
-namespace TrafficLightDemo
+namespace WisconsinRobotics
 {
     public partial class TrafficLightDemo : Window
     {
@@ -104,7 +104,6 @@ namespace TrafficLightDemo
         private List<Pen> bodyColors;
         #endregion
 
-        const string HELP_TEXT = @"";
         const int BAUD_RATE = 9600;
 
         BodyFrameReader bodyFrameReader;
@@ -132,6 +131,14 @@ namespace TrafficLightDemo
             get { return imageSource; }
         }
 
+        private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Threading.Thread.Sleep(500);
+            trafficLightSerialPort.Write("h"); // outside of range, which turns it off
+            System.Threading.Thread.Sleep(500);
+            Dispose();
+        }
+
         private void TrafficLightSetPortButton_Click(object sender, RoutedEventArgs eventArgs)
         {
             string port = TrafficLightPortTextBox.Text;
@@ -142,7 +149,7 @@ namespace TrafficLightDemo
                 return;
             }
 
-            trafficLightSerialPort = new SerialPort(port, BAUD_RATE);
+            trafficLightSerialPort = new SerialPort(port, BAUD_RATE, Parity.None, 8, StopBits.One);
             try 
             {
                 trafficLightSerialPort.Open();
@@ -151,8 +158,7 @@ namespace TrafficLightDemo
             {
                 MessageBox.Show(
                     string.Format(@"Failed to open {0}, please check that the traffic light is connected to that port. 
-                                    Exception: {1}", port, e.GetType().Name),
-                    "Error");
+                                    Exception: {1}", port, e.GetType().Name), "Error");
                 return;
             }
 
@@ -322,6 +328,12 @@ namespace TrafficLightDemo
 
             if (sensor != null && sensor.IsOpen)
                 sensor.Close();
+
+            if (trafficLightSerialPort != null && trafficLightSerialPort.IsOpen)
+            {
+                trafficLightSerialPort.Close();
+                trafficLightSerialPort.Dispose();
+            }
         }
 
         #region Drawing code
