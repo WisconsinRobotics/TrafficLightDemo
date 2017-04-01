@@ -134,7 +134,8 @@ namespace WisconsinRobotics
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Threading.Thread.Sleep(500);
-            trafficLightSerialPort.Write("h"); // outside of range, which turns it off
+            if (trafficLightSerialPort != null)
+                trafficLightSerialPort.Write("h"); // outside of range, which turns it off
             System.Threading.Thread.Sleep(500);
             Dispose();
         }

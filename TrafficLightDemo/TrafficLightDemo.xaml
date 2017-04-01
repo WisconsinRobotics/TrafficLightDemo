@@ -36,28 +36,42 @@
                         <Label TextElement.FontWeight="Bold" HorizontalAlignment="Center">About Us</Label>
                     </Viewbox>
                 </Border>
-                <StackPanel Grid.Row="2">
-                    <Viewbox>
-                        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap">
-                        Founded in 2002, Wisconsin Robotics proudly represents<LineBreak/>
-                        the students of the University of Wisconsin-Madison.<LineBreak/>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0">
+                        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Justify">
+                        Founded in 2002, Wisconsin Robotics proudly<LineBreak/>
+                        represents the students at the<LineBreak/>
+                        University of Wisconsin-Madison.<LineBreak/>
                         <LineBreak/>
-                        Team members design, test, and implement autonomous<LineBreak/>
-                        and teleoperated robots for national competitions and <LineBreak/>
-                        practical applications with the goal of furthering the field<LineBreak/>
-                        of robotics, educating the public, and developing skills <LineBreak/>
-                        in design and project management to be carried<LineBreak/>
-                        forward into student’s professional careers.<LineBreak/>
-
+                        
+                        Team members design, test, and implement<LineBreak/>
+                        autonomous and remotely-operated robots for  <LineBreak/>
+                        national competition and practical applications. <LineBreak/>
+                        
                         <LineBreak/>
+                        Additionally, the team's goals include educating <LineBreak/> 
+                        the public, developing skills in design and <LineBreak/>
+                        project management to be carried forward into <LineBreak/>
+                        the students' professional careers.<LineBreak/>
                         <LineBreak/>
-                        <LineBreak/>
-                        To learn more, visit us at: <LineBreak/>
+                        
+                        To learn more, visit us at:
                         </TextBlock>
                     </Viewbox>
-                    <Border BorderBrush="LightGray" BorderThickness="0 0 0 1"/>
-                    <Image Source="wr_site_qr.png"/>
-                </StackPanel>
+                    <Border BorderBrush="LightGray" BorderThickness="0 1 0 0" Grid.Row="1">
+                        <Image Grid.Row="1" Source="wr_site_qr.png"/>
+                    </Border>
+                    <Viewbox Grid.Row="2" HorizontalAlignment="Center" Margin="2 2 2 2">
+                        <TextBlock Foreground="Blue" FontStyle="Italic">
+                        www.wisconsinrobotics.org
+                        </TextBlock>
+                    </Viewbox>
+                </Grid>
             </Grid>
 
             <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1"/>
