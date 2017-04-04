@@ -89,7 +89,7 @@
                         <Label>Traffic Light Port</Label>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="0 1 0 1">
-                        <TextBox x:Name="TrafficLightPortTextBox" MaxLength="4" VerticalAlignment="Center">COMX</TextBox>
+                        <TextBox x:Name="TrafficLightPortTextBox" MaxLength="5" VerticalAlignment="Center">COMX</TextBox>
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="0 1 1 1">
                         <Button x:Name="TrafficLightSetPortButton" VerticalAlignment="Center" Click="TrafficLightSetPortButton_Click">
