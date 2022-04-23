@@ -65,19 +65,26 @@ void loop()
         case 'b':
             fast_red();
             break;
+            /*
         case 'c':
             slow_yellow();
             break;
-        case 'd':
+            */
+        case 'c':
             fast_yellow();
             break;
+            /*
         case 'e':
             slow_green();
             break;
-        case 'f':
+            */
+        case 'd':
             fast_green();
             break;
-        case 'g':
+        case 'e':
+            slow_cycle();
+            break;
+        case 'f':
             party_mode();
             break;
         default:
@@ -138,3 +145,9 @@ void party_mode()
     toggle_leds(true, true, true, PARTY_FLASH_INTERVAL);
 }
 
+void slow_cycle()
+{
+    toggle_leds(true, false, false, SLOW_FLASH_INTERVAL);
+    toggle_leds(false, true, false, SLOW_FLASH_INTERVAL);
+    toggle_leds(false, false, true, SLOW_FLASH_INTERVAL);
+}

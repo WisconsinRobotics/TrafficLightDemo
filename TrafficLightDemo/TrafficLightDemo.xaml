@@ -138,11 +138,9 @@
                         <Bold>Behavior:</Bold><LineBreak/>
                         •    <Bold>0 people tracked</Bold> - flash red, slowly <LineBreak/>
                         •    <Bold>1 people tracked</Bold> - flash red, quickly <LineBreak/>
-                        •    <Bold>2 people tracked</Bold> - flash yellow, slowly <LineBreak/>
-                        •    <Bold>3 people tracked</Bold> - flash yellow, quickly <LineBreak/>
-                        •    <Bold>4 people tracked</Bold> - flash green, slowly <LineBreak/>
-                        •    <Bold>5 people tracked</Bold> - flash green, quickly <LineBreak/>
-                        •    <Bold>6 people tracked</Bold> - ??? - find out! <LineBreak/>
+                        •    <Bold>2 people tracked</Bold> - flash yellow, quickly <LineBreak/>
+                        •    <Bold>3 people tracked</Bold> - flash green, quickly <LineBreak/>
+                        •    <Bold>4 people tracked</Bold> - ??? - find out! <LineBreak/>
                     </TextBlock>
                 </Viewbox>
             </StackPanel>
